@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Hearing Loss Study - Data Collection</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; max-width: 800px; }
+        h1 { text-align: center; }
+        h2 { color: #2c3e50; }
+        .section { margin-bottom: 20px; border: 1px solid #ddd; padding: 15px; }
+        label { display: block; margin: 5px 0; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 5px; }
+        .hidden { display: none; }
+        button { background-color: #3498db; color: white; padding: 10px 20px; border: none; cursor: pointer; }
+        button:hover { background-color: #2980b9; }
+    </style>
+</head>
+<body>
+    <h1>Bangladesh Institute of Health Sciences</h1>
+    <p style="text-align: center;">Study: Prevalence of Sensorineural Hearing Loss among Diabetic Patients</p>
+
+    <form id="hearingStudyForm">
+        <!-- Section A: Demographic Information -->
+        <div class="section">
+            <h2>Section A: Demographic Information</h2>
+            <label>1. Participant ID: <input type="text" name="participant_id" required></label>
+            <label>Selected via systemic randomization: 
+                <input type="radio" name="randomized" value="Yes"> Yes 
+                <input type="radio" name="randomized" value="No"> No
+            </label>
+            <label>2. Age: <input type="number" name="age" min="10" required> years</label>
+            <label>3. Gender: 
+                <input type="radio" name="gender" value="Male" required> Male 
+                <input type="radio" name="gender" value="Female"> Female
+            </label>
+            <label>4. Occupation: <input type="text" name="occupation"></label>
+            <label>5. Education Level:
+                <select name="education" required>
+                    <option value="">Select</option>
+                    <option value="No formal education">No formal education</option>
+                    <option value="Primary">Primary</option>
+                    <option value="Secondary">Secondary</option>
+                    <option value="Higher education">Higher education</option>
+                </select>
+            </label>
+        </div>
+
+        <!-- Section B: Diabetes History -->
+        <div class="section">
+            <h2>Section B: Diabetes History</h2>
+            <label>6. Type of Diabetes:
+                <input type="radio" name="diabetes_type" value="Type 1" required> Type 1
+                <input type="radio" name="diabetes_type" value="Type 2"> Type 2
+            </label>
+            <label>7. Duration of Diabetes: <input type="number" name="diabetes_duration" min="0"> years</label>
+            <label><input type="checkbox" name="duration_range" value="0-5"> 0-5 years</label>
+            <label><input type="checkbox" name="duration_range" value="6-10"> 6-10 years</label>
+            <label><input type="checkbox" name="duration_range" value="11-15"> 11-15 years</label>
+            <label><input type="checkbox" name="duration_range" value=">15"> >15 years</label>
+            <label>8. Current Diabetes Treatment:
+                <input type="checkbox" name="treatment" value="Insulin"> Insulin
+                <input type="checkbox" name="treatment" value="Oral medication"> Oral medication
+                <input type="checkbox" name="treatment" value="Both"> Both
+                <input type="checkbox" name="treatment" value="Lifestyle modification"> Lifestyle modification only
+            </label>
+            <label>9. Last HbA1c level (if known): <input type="number" name="hba1c" step="0.1"> %</label>
+            <label><input type="checkbox" name="hba1c_range" value="<7"> <7 (well controlled)</label>
+            <label><input type="checkbox" name="hba1c_range" value="7-9"> 7-9</label>
+            <label><input type="checkbox" name="hba1c_range" value=">9"> >9 (grossly uncontrolled)</label>
+            <label>10. Oral Anti-Diabetic Agent(s) Using:
+                <input type="checkbox" name="oral_agent" value="Secretagogue"> Secretagogue
+                <input type="checkbox" name="oral_agent" value="Metformin"> Metformin
+                <input type="checkbox" name="oral_agent" value="Gliptin"> Gliptin
+                <input type="checkbox" name="oral_agent" value="SGLT2 Inhibitor"> SGLT2 Inhibitor
+                <input type="checkbox" name="oral_agent" value="Other"> Other: <input type="text" name="oral_other">
+                <input type="checkbox" name="oral_agent" value="Combination"> Combination: <input type="text" name="oral_combination">
+            </label>
+            <label>11. Last Fasting Blood Sugar Level: <input type="number" name="fasting_sugar"> mg/dL</label>
+            <label>12. Last 2-Hour Postprandial Glucose Level: <input type="number" name="postprandial_sugar"> mg/dL</label>
+            <label>13. Diabetes-Related Complications:
+                <input type="checkbox" name="complications" value="Neuropathy"> Neuropathy
+                <input type="checkbox" name="complications" value="Retinopathy"> Retinopathy
+                <input type="checkbox" name="complications" value="Nephropathy"> Nephropathy
+                <input type="checkbox" name="complications" value="Cardiovascular disease"> Cardiovascular disease
+                <input type="checkbox" name="complications" value="Other"> Other: <input type="text" name="complications_other">
+            </label>
+        </div>
+
+        <!-- Section C: Hearing History and Screening -->
+        <div class="section">
+            <h2>Section C: Hearing History and Screening</h2>
+            <label>14. Do you experience difficulty hearing?
+                <input type="radio" name="hearing_difficulty" value="Yes" onclick="toggleHearingDuration(true)"> Yes
+                <input type="radio" name="hearing_difficulty" value="No" onclick="toggleHearingDuration(false)"> No
+            </label>
+            <div id="hearing_duration" class="hidden">
+                <label>15. If yes, for how long? 
+                    <input type="number" name="hearing_years" min="0"> years / 
+                    <input type="number" name="hearing_months" min="0" max="11"> months
+                </label>
+            </div>
+            <label>16. Which ear is affected more?
+                <input type="radio" name="ear_affected" value="Right"> Right
+                <input type="radio" name="ear_affected" value="Left"> Left
+                <input type="radio" name="ear_affected" value="Both equally"> Both equally
+            </label>
+            <label>17. Do you use hearing aids?
+                <input type="radio" name="hearing_aids" value="Yes"> Yes
+                <input type="radio" name="hearing_aids" value="No"> No
+            </label>
+            <label>18. History of ear infections or surgeries?
+                <input type="radio" name="ear_history" value="Yes"> Yes <input type="text" name="ear_history_details">
+                <input type="radio" name="ear_history" value="No"> No
+            </label>
+            <label>19. History of chronic kidney disease?
+                <input type="radio" name="ckd" value="Yes"> Yes
+                <input type="radio" name="ckd" value="No"> No
+            </label>
+            <label>20. Currently taking ototoxic drugs?
+                <input type="radio" name="ototoxic" value="Yes"> Yes <input type="text" name="ototoxic_details">
+                <input type="radio" name="ototoxic" value="No"> No
+            </label>
+            <label>21. Diagnosed with conductive hearing loss?
+                <input type="radio" name="conductive" value="Yes"> Yes
+                <input type="radio" name="conductive" value="No"> No
+            </label>
+            <label>22. Family history of hearing loss?
+                <input type="radio" name="family_history" value="Yes"> Yes
+                <input type="radio" name="family_history" value="No"> No
+            </label>
+            <label>23. Exposed to loud noise?
+                <input type="radio" name="noise_exposure" value="Yes"> Yes
+                <input type="radio" name="noise_exposure" value="No"> No
+            </label>
+            <label>24. Have tinnitus?
+                <input type="radio" name="tinnitus" value="Yes"> Yes
+                <input type="radio" name="tinnitus" value="No"> No
+            </label>
+            <label>25. Smoke or history of smoking?
+                <input type="radio" name="smoking" value="Yes"> Yes
+                <input type="radio" name="smoking" value="No"> No
+            </label>
+            <label>26. Have hypertension?
+                <input type="radio" name="hypertension" value="Yes"> Yes
+                <input type="radio" name="hypertension" value="No"> No
+            </label>
+        </div>
+
+        <!-- Section D: Audiometric and Clinical Examination -->
+        <div class="section">
+            <h2>Section D: Audiometric and Clinical Examination (Researcher Use Only)</h2>
+            <label>27. Otoscopy Findings:
+                <input type="radio" name="otoscopy" value="Normal"> Normal
+                <input type="radio" name="otoscopy" value="Abnormal"> Abnormal <input type="text" name="otoscopy_details">
+            </label>
+            <label>28. Pure-Tone Audiometry Results:
+                Right Ear: <input type="number" name="right_ear_db" min="0"> dB
+                Left Ear: <input type="number" name="left_ear_db" min="0"> dB
+            </label>
+            <label>29. Classification of Hearing Loss (worse ear):
+                <select name="hearing_classification">
+                    <option value="Normal">Normal (≤25 dB)</option>
+                    <option value="Mild">Mild (26-40 dB)</option>
+                    <option value="Moderate">Moderate (41-55 dB)</option>
+                    <option value="Severe">Severe (56-70 dB)</option>
+                    <option value="Profound">Profound (>70 dB)</option>
+                </select>
+            </label>
+            <label>30. Disabling Hearing Loss (>41 dB in better ear):
+                <input type="radio" name="disabling" value="Yes"> Yes
+                <input type="radio" name="disabling" value="No"> No
+                Better ear dB: <input type="number" name="better_ear_db" min="0">
+            </label>
+        </div>
+
+        <!-- Consent -->
+        <div class="section">
+            <h2>Consent Statement</h2>
+            <label>I, <input type="text" name="participant_name" required> (Participant’s Name), agree to participate in this study. I understand the purpose and procedures involved, that my participation is voluntary, and that I may withdraw at any time without penalty. My identity and data will remain confidential.</label>
+            <label>Signature/Thumbprint (type name if online): <input type="text" name="signature" required></label>
+            <label>Date: <input type="date" name="consent_date" required></label>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function toggleHearingDuration(show) {
+            document.getElementById('hearing_duration').classList.toggle('hidden', !show);
+        }
+
+        document.getElementById('hearingStudyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            fetch('https://script.google.com/macros/s/AKfycbyslZstKMW1m1SpcPhYnWBKk7-2My30f42HZQS1gkn3u6C-LvkMENWcIWIGhlNxtO2zdQ/exec', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json' }
+}).then(response => alert('Data submitted successfully!')).catch(error => alert('Error: ' + error));
+        });
+    </script>
+</body>
+</html>
